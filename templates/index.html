@@ -1,0 +1,17 @@
+<!-- templates/index.html -->
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Cloudmagic.xyz</h1>
+    {{range .}}
+    <h2>{{.Title}}</h2>
+    <p>{{.Content}}</p>
+    <hr>
+    {{end}}
+</body>
+
+</html>
