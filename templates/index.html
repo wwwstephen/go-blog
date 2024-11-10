@@ -1,4 +1,3 @@
-<!-- templates/index.html -->
 <html>
 
 <head>
@@ -6,10 +5,13 @@
 </head>
 
 <body>
-    <h1>Cloudmagic.xyz</h1>
+    <!-- Updated the link to go to the root URL -->
+    <h1><a href="index.html">Cloudmagic.xyz</a></h1>
     {{range .}}
-    <h2>{{.Title}}</h2>
-    <p>{{.Content}}</p>
+    <!-- Make the title a link using the Slug field -->
+    <h2><a href="{{.Slug}}">{{.Title}}</a></h2>
+    <!-- Use template.HTML in Go if the content includes raw HTML -->
+    <div>{{.Content}}</div>
     <hr>
     {{end}}
 </body>

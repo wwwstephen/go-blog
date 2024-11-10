@@ -7,6 +7,7 @@ import (
 	"log"
 
 	db "github.com/wwwstephen/go-blog/db/sqlc"
+	"github.com/wwwstephen/go-blog/utils"
 
 	"github.com/wwwstephen/go-blog/generator"
 
@@ -29,11 +30,13 @@ func main() {
 	// Initialize `Queries` with a valid `DBTX` instance
 	q := db.New(d)
 
+	title := "How Blockchain is Changing the World"
+
 	postParams := db.CreatePostParams{
-		Title:   "Introduction to Go Modules for Dependency Management",
-		Content: "Go Modules have transformed dependency management in Go, allowing for better control over versions and compatibility. This guide explains the basics of Go Modules, from initializing a module to managing dependencies and resolving version conflicts. We’ll also cover some common pitfalls and tips for effectively using modules in your projects.",
+		Title:   title,
+		Content: "<p>Blockchain technology is more than just the foundation of cryptocurrencies. It's being used in supply chain management, healthcare, and even voting systems to ensure <strong>transparency</strong> and <strong>security</strong>.</p>",
 		Author:  "Michael Brown",
-		Slug:    "introduction-to-go-modules-for-dependency-management",
+		Slug:    utils.GenerateSlug(title, 50),
 	}
 
 	id, err := q.CreatePost(context.Background(), postParams)

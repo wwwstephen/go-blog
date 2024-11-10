@@ -24,5 +24,7 @@ func GenerateSlug(title string, maxLength int) string {
 	// Trim trailing hyphens if cut off at max length
 	slug = strings.TrimRight(slug, "-")
 
+	slug += ".html"
+
 	return slug
 }

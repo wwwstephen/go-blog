@@ -12,6 +12,15 @@ import (
 	"github.com/wwwstephen/go-blog/utils"
 )
 
+type PostWithHTML struct {
+	ID        int32
+	Title     string
+	Content   template.HTML // Use template.HTML for raw HTML rendering
+	Author    string
+	CreatedAt sql.NullTime
+	Slug      string
+}
+
 // renderTemplate generates a static HTML file for each post
 func renderTemplate(filename string, tmpl string, data interface{}) error {
 	t, err := template.ParseFiles("templates/" + tmpl + ".html")
@@ -33,7 +42,7 @@ func GenerateStaticPages() {
 	posts := GetPosts()
 
 	for _, post := range posts {
-		filename := utils.GenerateSlug(post.Title, 50) + ".html"
+		filename := utils.GenerateSlug(post.Title, 50)
 		err := renderTemplate(filename, "post", post)
 		if err != nil {
 			log.Printf("failed to generate static page for %s: %v\n", post.Title, err)
@@ -52,7 +61,7 @@ func RenderMain() {
 	}
 }
 
-func GetPosts() []db.Post {
+func GetPosts() []PostWithHTML {
 	connStr := "postgresql://root:secret@localhost:5432/go_blog?sslmode=disable"
 	d, err := sql.Open("postgres", connStr)
 	if err != nil {
@@ -73,5 +82,17 @@ func GetPosts() []db.Post {
 		log.Fatalf("There is an error")
 	}
 
-	return posts
+	var postsWithHTML []PostWithHTML
+	for _, post := range posts {
+		postsWithHTML = append(postsWithHTML, PostWithHTML{
+			ID:        post.ID,
+			Title:     post.Title,
+			Content:   template.HTML(post.Content), // Convert string to template.HTML
+			Author:    post.Author,
+			CreatedAt: post.CreatedAt,
+			Slug:      post.Slug,
+		})
+	}
+
+	return postsWithHTML
 }

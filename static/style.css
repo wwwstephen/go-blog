@@ -1,5 +1,3 @@
-/* static/style.css */
-
 /* Basic Reset */
 * {
     margin: 0;
@@ -45,6 +43,20 @@ h2 {
     margin-bottom: 10px;
 }
 
+/* Links */
+a {
+    color: #66d9ef;
+    /* Bright cyan for links */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #f92672;
+    /* Pink on hover */
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
 /* Separator Line */
 hr {
     border: 0;
@@ -57,17 +69,7 @@ hr {
 /* Post Content */
 p {
     font-size: 1.1em;
-    color: #f0f0f0;
-    /* Light text for content */
     margin-bottom: 15px;
-}
-
-/* Hover Effect for Titles */
-h2:hover {
-    color: #66d9ef;
-    /* Bright cyan on hover */
-    cursor: pointer;
-    transition: color 0.3s ease;
 }
 
 /* Footer */
